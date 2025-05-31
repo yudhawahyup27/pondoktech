@@ -17,7 +17,7 @@
         <button
           v-for="(tag, index) in allTags"
           :key="index"
-          @click="() => { selectTag(tag); animateButton($event) }"
+          @click="(e) => { selectTag(tag); animateButton(e) }"
           :class="[
             'px-4 py-1 rounded-full border transition',
             selectedTag === tag
@@ -98,7 +98,7 @@
       <button
         v-for="page in totalPages"
         :key="page"
-        @click="() => { currentPage = page; animateButton($event) }"
+        @click="(e) => { currentPage = page; animateButton(e) }"
         :class="[
           'px-4 py-1 rounded border transition',
           currentPage === page
@@ -167,73 +167,71 @@
 import { ref, computed, watch, nextTick, onMounted } from 'vue'
 import gsap from 'gsap'
 
-// Data project dengan tanggal
-const projects = ref([
+interface Project {
+  name: string
+  desc: string
+  tech: string[]
+  image: string
+  demo?: string
+  github?: string
+  date: string
+}
+
+const projects = ref<Project[]>([
   {
     name: 'Rantai Tani',
-    desc: 'Platform web terintegrasi ini dirancang sebagai solusi komprehensif untuk bisnis yang membutuhkan manajemen stok produk secara akurat, pengelolaan hubungan investor yang transparan, dan pemantauan transaksi setiap mitra secara efisien. Dengan fitur terpusat untuk pelacakan inventaris real-time, pelaporan investor, dan analisis performa mitra, sistem ini bertujuan meningkatkan efisiensi operasional, memberikan visibilitas data yang menyeluruh, serta mendukung pengambilan keputusan strategis berbasis data bagi seluruh pemangku kepentingan.',
+    desc: 'Platform web terintegrasi...',
     tech: ['Laravel', 'Mysql', 'Bootstrap'],
     image: '/projects/rantaitani.png',
     demo: 'https://rantai-tani.com',
-    // github: 'https://github.com/yourname/tokosayur',
     date: '2025-10-15'
   },
   {
     name: 'Demangan Farm',
-    desc: 'Dashboard monitoring real-time ini menyajikan pandangan komprehensif terhadap operasional pertanian Anda dalam satu tampilan terpusat, menampilkan secara langsung data krusial seperti suhu dan kelembaban lingkungan, volume air, status ketersediaan pakan atau nutrisi esensial (makanan), serta status on/off berbagai sensor penting yang tersebar di seluruh area pertanian atau peternakan. Dengan visualisasi data yang akurat dan terkini, platform ini memberdayakan para petani atau pengelola untuk mengambil keputusan secara cepat dan proaktif, mengoptimalkan penggunaan sumber daya, menjaga kondisi lingkungan ideal bagi pertumbuhan tanaman maupun kesehatan ternak, dan pada akhirnya meningkatkan efisiensi serta produktivitas usaha tani secara signifikan.',
+    desc: 'Dashboard monitoring real-time...',
     tech: ['Laravel', 'Firebase','Bootstrap'],
     image: '/projects/demanganfarm.png',
-    demo: '',
     github: 'https://github.com/yourname/absensi-qr',
     date: '2023-07-22'
   },
   {
     name: 'Absensi Mobile by location',
-    desc: 'Sistem absensi modern ini secara akurat mencatat kehadiran dengan memadukan verifikasi lokasi geografis (GPS) untuk memastikan pengguna berada di tempat yang ditentukan, dan teknologi pengenalan wajah untuk mengonfirmasi identitas individu, sehingga mencegah kecurangan dan meningkatkan efisiensi.',
+    desc: 'Sistem absensi modern...',
     tech: ['Kotlin', 'Firebase'],
     image: '/projects/absensi.jpg',
-    demo: '',
-    github: '',
     date: '2023-09-10'
   },
   {
     name: 'AmalPlus',
-    desc: 'AmalPlus adalah platform digital Islami yang didedikasikan untuk mempermudah dan memperluas jangkauan kebaikan. Kami hadir sebagai jembatan bagi Anda yang ingin beramal, berdonasi, atau berkontribusi pada berbagai program kebaikan yang sesuai syariat Islam. Dengan antarmuka yang user-friendly dan transparan, AmalPlus memastikan setiap amal Anda tersalurkan secara efektif dan akuntabel. Bergabunglah dengan AmalPlus, dan jadikan setiap kebaikan lebih mudah, bermakna, dan berdampak luas.',
+    desc: 'AmalPlus adalah platform digital Islami...',
     tech: ['Nuxt', 'GSAP', 'Tailwind'],
     image: '/projects/amalplus.png',
-    demo: '',
-    github: '',
     date: '2023-06-05'
   },
   {
     name: 'Republik Bibit',
-    desc: 'Republik Bibit adalah platform penjualan bibit yang menyediakan beragam pilihan bibit berkualitas, didukung oleh sistem manajemen stok yang cermat untuk memastikan ketersediaan produk secara real-time. Untuk kemudahan dan keamanan setiap transaksi, platform ini telah terintegrasi dengan payment gateway Midtrans, serta menangani berbagai aspek operasional penjualan lainnya secara efisien.',
+    desc: 'Republik Bibit adalah platform penjualan bibit...',
     tech: ['Laravel','Mysql', 'Bootstrap'],
     image: '/projects/republikbibit.png',
-    demo: '',
-    github: '',
     date: '2023-08-12'
   }
 ])
 
-const selectedTag = ref('All')
-const search = ref('')
-const sortOrder = ref('latest')
-const gridRef = ref()
-
+const selectedTag = ref<string>('All')
+const search = ref<string>('')
+const sortOrder = ref<string>('latest')
+const gridRef = ref<HTMLElement | null>(null)
 const currentPage = ref(1)
 const perPage = 3
 
-// Semua tag unik
 const allTags = computed(() => {
-  const tags = new Set(['All'])
+  const tags = new Set<string>(['All'])
   projects.value.forEach(p => p.tech.forEach(t => tags.add(t)))
   return Array.from(tags)
 })
 
-// Filter berdasarkan tag & search
-const filteredProjects = computed(() => {
-  return projects.value.filter(p => {
+const filteredProjects = computed(() =>
+  projects.value.filter(p => {
     const matchTag =
       selectedTag.value === 'All' || p.tech.includes(selectedTag.value)
     const matchSearch =
@@ -241,11 +239,10 @@ const filteredProjects = computed(() => {
       p.desc.toLowerCase().includes(search.value.toLowerCase())
     return matchTag && matchSearch
   })
-})
+)
 
-// Sort berdasarkan pilihan
 const sortedProjects = computed(() => {
-  const arr = filteredProjects.value.slice()
+  const arr = [...filteredProjects.value]
   switch (sortOrder.value) {
     case 'latest':
       return arr.sort((a, b) => (a.date < b.date ? 1 : -1))
@@ -255,14 +252,15 @@ const sortedProjects = computed(() => {
       return arr.sort((a, b) => a.name.localeCompare(b.name))
     case 'name-desc':
       return arr.sort((a, b) => b.name.localeCompare(a.name))
+    default:
+      return arr
   }
-  return arr
 })
 
-// Pagination
 const totalPages = computed(() =>
   Math.ceil(sortedProjects.value.length / perPage)
 )
+
 const paginatedProjects = computed(() =>
   sortedProjects.value.slice(
     (currentPage.value - 1) * perPage,
@@ -270,32 +268,31 @@ const paginatedProjects = computed(() =>
   )
 )
 
-// Pilih tag filter
-function selectTag(tag) {
+function selectTag(tag: string) {
   selectedTag.value = tag
   currentPage.value = 1
 }
 
-// Animasi tombol pakai GSAP
-function animateButton(e) {
-  gsap.fromTo(
-    e.target,
-    { scale: 1 },
-    { scale: 1.1, duration: 0.1, yoyo: true, repeat: 1 }
-  )
+function animateButton(e: Event) {
+  const target = e.target as HTMLElement
+  if (target) {
+    gsap.fromTo(
+      target,
+      { scale: 1 },
+      { scale: 1.1, duration: 0.1, yoyo: true, repeat: 1 }
+    )
+  }
 }
 
-// Modal detail project
-const selectedProject = ref(null)
-function openProject(project) {
+const selectedProject = ref<Project | null>(null)
+function openProject(project: Project) {
   selectedProject.value = project
 }
 
-// Reset halaman saat filter/search berubah
 watch([search, selectedTag, sortOrder], () => {
   currentPage.value = 1
   nextTick(() => {
-    if (gridRef.value) {
+    if (gridRef.value?.children) {
       gsap.fromTo(
         gridRef.value.children,
         { opacity: 0, y: 30 },
@@ -311,7 +308,7 @@ watch([search, selectedTag, sortOrder], () => {
 })
 
 onMounted(() => {
-  if (gridRef.value) {
+  if (gridRef.value?.children) {
     gsap.fromTo(
       gridRef.value.children,
       { opacity: 0, y: 30 },
@@ -325,6 +322,7 @@ onMounted(() => {
   }
 })
 </script>
+
 
 <style scoped>
 /* Custom scrollbar for modal if needed */

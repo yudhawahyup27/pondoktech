@@ -46,23 +46,24 @@ import { onMounted, ref, nextTick } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+// Registrasi plugin ScrollTrigger ke GSAP
 gsap.registerPlugin(ScrollTrigger)
 
-const heroSection = ref(null)
-const leftColumn = ref(null)
-const rightColumn = ref(null)
-const title = ref(null)
-const subtitle = ref(null)
-const description = ref(null)
-const ctaButton = ref(null)
-const heroImage = ref(null)
+// Tipe Ref yang sesuai untuk elemen DOM
+const heroSection = ref<HTMLElement | null>(null)
+const leftColumn = ref<HTMLElement | null>(null)
+const rightColumn = ref<HTMLElement | null>(null)
+const title = ref<HTMLElement | null>(null)
+const subtitle = ref<HTMLElement | null>(null)
+const description = ref<HTMLElement | null>(null)
+const ctaButton = ref<HTMLAnchorElement | null>(null)
+const heroImage = ref<HTMLImageElement | null>(null)
 
 onMounted(() => {
   nextTick(() => {
-    // Initial animation timeline when component loads
     const tl = gsap.timeline()
 
-    // Animate title with typing effect
+    // Animasi awal saat komponen dimount
     tl.from(title.value, {
       opacity: 0,
       x: -100,
@@ -96,7 +97,7 @@ onMounted(() => {
       ease: 'power2.out'
     }, '-=0.8')
 
-    // Scroll-triggered animations with better control
+    // Scroll-triggered animations
     ScrollTrigger.create({
       trigger: heroSection.value,
       start: 'top top',
@@ -110,7 +111,7 @@ onMounted(() => {
           yPercent: -(progress * 50)
         })
 
-        // Text fade and movement - reversible
+        // Text fade and movement
         gsap.set([title.value, subtitle.value, description.value], {
           opacity: Math.max(0.2, 1 - (progress * 0.8)),
           y: -(progress * 80)
@@ -123,14 +124,12 @@ onMounted(() => {
         })
       },
       onLeave: () => {
-        // Smooth transition when leaving viewport
         gsap.to([title.value, subtitle.value, description.value], {
           opacity: 0.2,
           duration: 0.3
         })
       },
       onEnterBack: () => {
-        // Smooth transition when entering back
         gsap.to([title.value, subtitle.value, description.value], {
           opacity: 1,
           y: 0,
@@ -146,28 +145,26 @@ onMounted(() => {
       }
     })
 
-    // CTA button floating animation
-    gsap.to(ctaButton.value, {
-      y: -5,
-      duration: 2,
-      ease: 'power2.inOut',
-      yoyo: true,
-      repeat: -1
-    })
+    // Floating CTA button animation
+    if (ctaButton.value) {
+      gsap.to(ctaButton.value, {
+        y: -5,
+        duration: 2,
+        ease: 'power2.inOut',
+        yoyo: true,
+        repeat: -1
+      })
 
-    // Enhanced hover effects
-    const ctaBtn = ctaButton.value
-    if (ctaBtn) {
-      ctaBtn.addEventListener('mouseenter', () => {
-        gsap.to(ctaBtn, {
+      ctaButton.value.addEventListener('mouseenter', () => {
+        gsap.to(ctaButton.value, {
           scale: 1.05,
           duration: 0.3,
           ease: 'power2.out'
         })
       })
 
-      ctaBtn.addEventListener('mouseleave', () => {
-        gsap.to(ctaBtn, {
+      ctaButton.value.addEventListener('mouseleave', () => {
+        gsap.to(ctaButton.value, {
           scale: 1,
           duration: 0.3,
           ease: 'power2.out'
@@ -175,11 +172,10 @@ onMounted(() => {
       })
     }
 
-    // Image hover effect
-    const img = heroImage.value
-    if (img) {
-      img.addEventListener('mouseenter', () => {
-        gsap.to(img, {
+    // Hero image hover effect
+    if (heroImage.value) {
+      heroImage.value.addEventListener('mouseenter', () => {
+        gsap.to(heroImage.value, {
           scale: 1.05,
           rotation: -2,
           duration: 0.4,
@@ -187,8 +183,8 @@ onMounted(() => {
         })
       })
 
-      img.addEventListener('mouseleave', () => {
-        gsap.to(img, {
+      heroImage.value.addEventListener('mouseleave', () => {
+        gsap.to(heroImage.value, {
           scale: 1,
           rotation: 0,
           duration: 0.4,
