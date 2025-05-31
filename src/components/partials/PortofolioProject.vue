@@ -183,7 +183,7 @@ const projects = ref([
     desc: 'Platform web terintegrasi ini dirancang sebagai solusi komprehensif untuk bisnis yang membutuhkan manajemen stok produk secara akurat, pengelolaan hubungan investor yang transparan, dan pemantauan transaksi setiap mitra secara efisien. Dengan fitur terpusat untuk pelacakan inventaris real-time, pelaporan investor, dan analisis performa mitra, sistem ini bertujuan meningkatkan efisiensi operasional, memberikan visibilitas data yang menyeluruh, serta mendukung pengambilan keputusan strategis berbasis data bagi seluruh pemangku kepentingan.',
     tech: ['Laravel', 'Mysql', 'Bootstrap'],
     image: '/projects/rantaitani.png',
-    demo: 'https://rantai-tani.com',
+    // demo: 'https://rantai-tani.com',
     // github: 'https://github.com/yourname/tokosayur',
     date: '2025-10-15'
   },
