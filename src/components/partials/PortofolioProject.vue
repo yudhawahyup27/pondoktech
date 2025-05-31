@@ -177,46 +177,53 @@ interface Project {
   date: string
 }
 
-const projects = ref<Project[]>([
+const projects = ref([
   {
     name: 'Rantai Tani',
-    desc: 'Platform web terintegrasi...',
+    desc: 'Platform web terintegrasi ini dirancang sebagai solusi komprehensif untuk bisnis yang membutuhkan manajemen stok produk secara akurat, pengelolaan hubungan investor yang transparan, dan pemantauan transaksi setiap mitra secara efisien. Dengan fitur terpusat untuk pelacakan inventaris real-time, pelaporan investor, dan analisis performa mitra, sistem ini bertujuan meningkatkan efisiensi operasional, memberikan visibilitas data yang menyeluruh, serta mendukung pengambilan keputusan strategis berbasis data bagi seluruh pemangku kepentingan.',
     tech: ['Laravel', 'Mysql', 'Bootstrap'],
     image: '/projects/rantaitani.png',
     demo: 'https://rantai-tani.com',
+    // github: 'https://github.com/yourname/tokosayur',
     date: '2025-10-15'
   },
   {
     name: 'Demangan Farm',
-    desc: 'Dashboard monitoring real-time...',
+    desc: 'Dashboard monitoring real-time ini menyajikan pandangan komprehensif terhadap operasional pertanian Anda dalam satu tampilan terpusat, menampilkan secara langsung data krusial seperti suhu dan kelembaban lingkungan, volume air, status ketersediaan pakan atau nutrisi esensial (makanan), serta status on/off berbagai sensor penting yang tersebar di seluruh area pertanian atau peternakan. Dengan visualisasi data yang akurat dan terkini, platform ini memberdayakan para petani atau pengelola untuk mengambil keputusan secara cepat dan proaktif, mengoptimalkan penggunaan sumber daya, menjaga kondisi lingkungan ideal bagi pertumbuhan tanaman maupun kesehatan ternak, dan pada akhirnya meningkatkan efisiensi serta produktivitas usaha tani secara signifikan.',
     tech: ['Laravel', 'Firebase','Bootstrap'],
     image: '/projects/demanganfarm.png',
+    demo: '',
     github: 'https://github.com/yourname/absensi-qr',
     date: '2023-07-22'
   },
   {
     name: 'Absensi Mobile by location',
-    desc: 'Sistem absensi modern...',
+    desc: 'Sistem absensi modern ini secara akurat mencatat kehadiran dengan memadukan verifikasi lokasi geografis (GPS) untuk memastikan pengguna berada di tempat yang ditentukan, dan teknologi pengenalan wajah untuk mengonfirmasi identitas individu, sehingga mencegah kecurangan dan meningkatkan efisiensi.',
     tech: ['Kotlin', 'Firebase'],
     image: '/projects/absensi.jpg',
+    demo: '',
+    github: '',
     date: '2023-09-10'
   },
   {
-    name: 'AmalPlus',
-    desc: 'AmalPlus adalah platform digital Islami...',
-    tech: ['Nuxt', 'GSAP', 'Tailwind'],
-    image: '/projects/amalplus.png',
+    name: 'Website Portfolio',
+    desc: 'Landing page portfolio pribadi dengan animasi GSAP.',
+    tech: ['Vue', 'GSAP', 'Tailwind'],
+    image: '/projects/portfolio.jpg',
+    demo: '',
+    github: '',
     date: '2023-06-05'
   },
   {
     name: 'Republik Bibit',
-    desc: 'Republik Bibit adalah platform penjualan bibit...',
+    desc: 'Aplikasi kasir sederhana berbasis web.',
     tech: ['Laravel','Mysql', 'Bootstrap'],
-    image: '/projects/republikbibit.png',
+    image: '/projects/republikbibit.jp',
+    demo: '',
+    github: '',
     date: '2023-08-12'
   }
 ])
-
 const selectedTag = ref<string>('All')
 const search = ref<string>('')
 const sortOrder = ref<string>('latest')
