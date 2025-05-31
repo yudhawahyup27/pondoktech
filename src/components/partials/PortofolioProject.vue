@@ -218,7 +218,7 @@ const projects = ref([
     name: 'Republik Bibit',
     desc: 'Website Penjualan macam macam bibit tumbuhan dengan pembayaran payment gateway midtrans dan buah buahan serta dashboard untuk kelola stok dan penjualan.',
     tech: ['Laravel','Mysql', 'Bootstrap'],
-    image: '/projects/republikbibit.jpg',
+    image: '/projects/republikbibit.png',
     demo: '',
     github: '',
     date: '2023-08-12'
