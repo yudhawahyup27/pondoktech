@@ -193,7 +193,7 @@ const projects = ref([
     tech: ['Laravel', 'Firebase','Bootstrap'],
     image: '/projects/demanganfarm.png',
     demo: '',
-    github: 'https://github.com/yourname/absensi-qr',
+    // github: 'https://github.com/yourname/absensi-qr',
     date: '2023-07-22'
   },
   {
@@ -205,20 +205,20 @@ const projects = ref([
     github: '',
     date: '2023-09-10'
   },
-  {
-    name: 'Website Portfolio',
-    desc: 'Landing page portfolio pribadi dengan animasi GSAP.',
-    tech: ['Vue', 'GSAP', 'Tailwind'],
-    image: '/projects/portfolio.jpg',
-    demo: '',
-    github: '',
-    date: '2023-06-05'
-  },
+  // {
+  //   name: 'Republic Bibit',
+  //   desc: 'Website Penjualan macam macam bibit tumbuhan dengan pembayaran payment gateway midtrans dan buah buahan serta dashboard untuk kelola stok dan penjualan.',
+  //   tech: ['Vue', 'GSAP', 'Tailwind'],
+  //   image: '/projects/portfolio.jpg',
+  //   demo: '',
+  //   github: '',
+  //   date: '2023-06-05'
+  // },
   {
     name: 'Republik Bibit',
-    desc: 'Aplikasi kasir sederhana berbasis web.',
+    desc: 'Website Penjualan macam macam bibit tumbuhan dengan pembayaran payment gateway midtrans dan buah buahan serta dashboard untuk kelola stok dan penjualan.',
     tech: ['Laravel','Mysql', 'Bootstrap'],
-    image: '/projects/republikbibit.jp',
+    image: '/projects/republikbibit.jpg',
     demo: '',
     github: '',
     date: '2023-08-12'
