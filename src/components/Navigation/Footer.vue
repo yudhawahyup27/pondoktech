@@ -14,7 +14,7 @@
           <a href="#serviceSection" class="hover:text-white transition">Services</a>
           <a href="#whyUsSection" class="hover:text-white transition">Why Us</a>
           <a href="#testimoniSection" class="hover:text-white transition">Testimonials</a>
-          <a href="#portfolioSection" class="hover:text-white transition">Portfolio</a>
+          <a href="#portofolioProject" class="hover:text-white transition">Portfolio</a>
         </nav>
 
         <!-- Sosial Media -->
