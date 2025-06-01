@@ -1,30 +1,36 @@
 <template>
-  <section ref="whyUsSection"  id="whyUsSection"  class="max-h-screen  flex flex-col items-center justify-center px-4 py-12 bg-gradient-to-br from-gray-50 to-blue-50 mt-10">
-    <!-- Section Title -->
-    <h3 ref="sectionTitle" class="text-center text-3xl sm:text-4xl text-blue-500 font-bold mb-10">Why Us</h3>
+  <div class="my-6">
+    <section
+  ref="whyUsSection"
+  id="whyUsSection"
+  class="my-40 my-md-0 px-4 py-16 bg-gradient-to-br from-gray-50 to-blue-50 flex flex-col items-center justify-center"
+>
+      <!-- Section Title -->
+      <h3 ref="sectionTitle" class="text-center text-3xl sm:text-4xl text-blue-500 font-bold mb-10">Why Us</h3>
 
-    <!-- Reason Cards -->
-    <ul ref="reasonsList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl">
-      <li
-        v-for="(reason, index) in reasons"
-        :key="index"
-        ref="reasonCards"
-        class="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100"
-      >
-        <div ref="iconContainers" class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-          <div class="w-6 h-6 bg-white rounded-full"></div>
-        </div>
-        <h4 ref="reasonTitles" class="text-blue-600 font-bold text-lg mb-2 text-center">{{ reason.title }}</h4>
-        <p ref="reasonDescriptions" class="text-gray-700 text-sm text-center">{{ reason.description }}</p>
-      </li>
-    </ul>
+      <!-- Reason Cards -->
+      <ul ref="reasonsList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl">
+        <li
+          v-for="(reason, index) in reasons"
+          :key="index"
+          ref="reasonCards"
+          class="bg-white shadow-lg p-6 rounded-xl hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100"
+        >
+          <div ref="iconContainers" class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <div class="w-6 h-6 bg-white rounded-full"></div>
+          </div>
+          <h4 ref="reasonTitles" class="text-blue-600 font-bold text-lg mb-2 text-center">{{ reason.title }}</h4>
+          <p ref="reasonDescriptions" class="text-gray-700 text-sm text-center">{{ reason.description }}</p>
+        </li>
+      </ul>
 
-    <!-- Testimoni -->
-    <div class="mt-20 max-w-3xl text-center">
-      <p class="text-xl sm:text-2xl text-gray-600 italic">"They delivered everything on time with excellent support. Couldn't be happier!"</p>
-      <p class="mt-4 text-blue-600 font-bold">— Happy Client</p>
-    </div>
-  </section>
+      <!-- Testimoni -->
+      <div class="mt-20 max-w-3xl text-center">
+        <p class="text-xl sm:text-2xl text-gray-600 italic">"They delivered everything on time with excellent support. Couldn't be happier!"</p>
+        <p class="mt-4 text-blue-600 font-bold">— Happy Client</p>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">

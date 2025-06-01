@@ -209,7 +209,7 @@ onMounted(async () => {
     <section
       ref="serviceSection"
 
-      class="flex flex-col justify-center items-center mx-auto text-center  my-10 "
+      class="flex flex-col justify-center items-center mx-auto text-center  mb-24 "
     >
       <div class="md:flex justify-center mt-4 gap-8 items-center">
         <div class="hidden md:flex justify-center flex-shrink-0">
@@ -217,7 +217,7 @@ onMounted(async () => {
         </div>
 
         <div
-          class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-8 my-4 items-stretch max-w-4xl"
+          class="grid grid-cols-2 lg:grid-cols-3 gap-8 my-4 items-stretch max-w-4xl"
         >
           <div
             v-for="(service, index) in services"
@@ -248,9 +248,9 @@ onMounted(async () => {
     </section>
 
     <!-- WHY US SECTION -->
-    <section ref="whyUsSection" class="  mx-auto px-4">
-      <WhyUs />
-    </section>
+  <section ref="whyUsSection" class="my-24 px-4 lg:px-8 max-w-6xl mx-auto">
+  <WhyUs />
+</section>
 
     <section class="mx-auto px-4">
   <PortofolioProject />
